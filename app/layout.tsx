@@ -8,6 +8,9 @@ import { Providers } from "./providers";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
 import clsx from "clsx";
 
+
+
+
 export const metadata: Metadata = {
 	title: {
 		default: siteConfig.name,
@@ -62,8 +65,6 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
 				</NavbarItem>
 			</NavbarContent>
 		</Navbar>
-
-
 		  <Providers>
 			{children}
 		  </Providers>
