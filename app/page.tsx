@@ -5,8 +5,14 @@ import { button as buttonStyles } from "@nextui-org/theme";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
+import prisma from '@/prisma/db'
 
-export default function Home() {
+export default async function Home() {
+
+	const findNullOrMissing = await prisma.user.findMany();
+	console.log(findNullOrMissing)
+
+
 	return (
 		<section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
 			<div className="inline-block max-w-lg text-center justify-center">
@@ -46,6 +52,7 @@ export default function Home() {
 					</span>
 				</Snippet>
 			</div>
+			
 		</section>
 	);
 }
