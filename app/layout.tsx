@@ -6,9 +6,7 @@ import { Providers } from "./providers";
 //import { Navbar } from "@/components/navbar";
 //import { Link } from "@nextui-org/link";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
-import clsx from "clsx";
-
-
+import ModalLogin from "./ui/components/modalLogin";
 
 
 export const metadata: Metadata = {
@@ -28,6 +26,7 @@ export const viewport: Viewport = {
 		{ media: "(prefers-color-scheme: dark)", color: "black" },
 	],
 }
+
 export default function RootLayout({children}: { children: React.ReactNode }) {
 	return (
 	  <html lang="en" className='dark'>
@@ -56,7 +55,8 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
 			</NavbarContent>
 			<NavbarContent justify="end">
 				<NavbarItem className="hidden lg:flex">
-				<Link href="#">Login</Link>
+					<Link href="/signIn">Login</Link>
+		  			<ModalLogin></ModalLogin>
 				</NavbarItem>
 				<NavbarItem>
 				<Button as={Link} color="primary" href="#" variant="flat">
