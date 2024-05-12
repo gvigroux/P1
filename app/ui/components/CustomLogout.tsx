@@ -4,10 +4,7 @@ import { Button } from "@nextui-org/button"
 import { signOut } from "next-auth/react"
 
 
-export const LogoutButton = async () => {
-	const session = await getAuthSession;
-    if( !session ) 
-        return (<div></div>);
+export const CustomLogout = () => {
     return (
         <Button onClick={() => signOut()}>Sign Out</Button>
     )

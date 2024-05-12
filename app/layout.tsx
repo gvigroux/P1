@@ -3,13 +3,10 @@ import { Metadata, Viewport } from "next";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
-//import { Navbar } from "@/components/navbar";
-//import { Link } from "@nextui-org/link";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, User} from "@nextui-org/react";
-import ModalLogin from "./ui/components/modalLogin";
-import { signOut } from "next-auth/react";
-import { LogoutButton } from "./ui/components/LogoutButton";
 import { getAuthSession } from "./lib/auth";
+import React from "react";
+import CustomNavbar from "./ui/components/CustomNavbar";
+import CustomLogin from "./ui/components/CustomLogin";
 
 
 export const metadata: Metadata = {
@@ -32,59 +29,16 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({children}: { children: React.ReactNode }) {
 	const session = await getAuthSession();
+
 	return (
 	  <html lang="en" className='dark'>
 		<body>
-			
-		<Navbar>
-			<NavbarBrand>
-				<p className="font-bold text-inherit">ACME</p>
-			</NavbarBrand>
-			<NavbarContent className="hidden sm:flex gap-4" justify="center">
-				<NavbarItem>
-				<Link color="foreground" href="#">
-					Features
-				</Link>
-				</NavbarItem>
-				<NavbarItem isActive>
-				<Link href="#" aria-current="page">
-					Customers
-				</Link>
-				</NavbarItem>
-				<NavbarItem>
-				<Link color="foreground" href="#">
-					Integrations
-				</Link>
-				</NavbarItem>
-			</NavbarContent>
-			<NavbarContent justify="end">
-				<NavbarItem className="hidden lg:flex">
-				<>
-					{session ? (
-						<div><User   
-						name={session.user?.name}
-						avatarProps={{
-							src: session.user?.image as string
-						}}
-						/>
-						<LogoutButton/></div>
-					) : (
-						<ModalLogin></ModalLogin>
-					)}			
-				</>
-
-
-				</NavbarItem>
-				<NavbarItem>
-				<Button as={Link} color="primary" href="#" variant="flat">
-					Sign Up
-				</Button>
-				</NavbarItem>
-			</NavbarContent>
-		</Navbar>
-		  <Providers>
-			{children}
-		  </Providers>
+			<CustomNavbar>
+				<CustomLogin session={session}/>
+			</CustomNavbar>
+			<Providers>
+				{children}
+			</Providers>
 		</body>
 	  </html>
 	);
