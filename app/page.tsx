@@ -4,18 +4,14 @@ import { Code } from "@nextui-org/code"
 import { button as buttonStyles } from "@nextui-org/theme";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
-import prisma from '@/prisma/db'
-import { getServerSession } from "next-auth";
-import authOptions from "./api/auth/[...nextauth]/options";
-import {User, Link} from "@nextui-org/react";
+import { GithubIcon } from "@/components/icons";;
+import {Link} from "@nextui-org/react";
 
 
 
 
 export default async function Home() {
 
-	const session = await getServerSession(authOptions);
 
 	return (
 		<section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
@@ -57,19 +53,6 @@ export default async function Home() {
 				</Snippet>
 			</div>
 
-			<>
-				{session ? (
-					<div><User   
-					  name={session.user?.name}
-					  avatarProps={{
-						src: session?.user?.image as string
-					  }}
-					/></div>
-				) : (
-					<div>ko</div>
-				)}			
-			</>
-		
 			
 		</section>
 	);

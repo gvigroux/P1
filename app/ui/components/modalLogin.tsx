@@ -11,8 +11,8 @@ export default function ModalLogin() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
-    <>
-    <Button onPress={onOpen} color="primary">Open Modal</Button>
+    <>    
+      <Link onPress={onOpen} color="primary" className="cursor-pointer">Login</Link>
       <Modal 
         isOpen={isOpen} 
         onOpenChange={onOpenChange}
@@ -52,10 +52,9 @@ export default function ModalLogin() {
                   <Link color="primary" href="#" size="sm">
                     Forgot password?
                   </Link>
-                </div>
+                </div>                                    
 
-                            
-                <Button onClick={() => signIn("google")} color="primary" startContent={<GoogleIcon/>} >
+                <Button className="inline-flex items-center text-[#333] text-base font-semibold border-none outline-none shadow-lg bg-gray-50 hover:bg-gray-100 active:bg-gray-50" onClick={() => signIn("google")} color="primary" startContent={<GoogleIcon className="mr-2 -ml-1 w-4 h-4"/>} >
                     SignIn with Google
                 </Button>
 

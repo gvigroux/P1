@@ -5,8 +5,11 @@ import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
 //import { Navbar } from "@/components/navbar";
 //import { Link } from "@nextui-org/link";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, User} from "@nextui-org/react";
 import ModalLogin from "./ui/components/modalLogin";
+import { signOut } from "next-auth/react";
+import { LogoutButton } from "./ui/components/LogoutButton";
+import { getAuthSession } from "./lib/auth";
 
 
 export const metadata: Metadata = {
@@ -27,7 +30,8 @@ export const viewport: Viewport = {
 	],
 }
 
-export default function RootLayout({children}: { children: React.ReactNode }) {
+export default async function RootLayout({children}: { children: React.ReactNode }) {
+	const session = await getAuthSession();
 	return (
 	  <html lang="en" className='dark'>
 		<body>
@@ -55,8 +59,21 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
 			</NavbarContent>
 			<NavbarContent justify="end">
 				<NavbarItem className="hidden lg:flex">
-					<Link href="/signIn">Login</Link>
-		  			<ModalLogin></ModalLogin>
+				<>
+					{session ? (
+						<div><User   
+						name={session.user?.name}
+						avatarProps={{
+							src: session.user?.image as string
+						}}
+						/>
+						<LogoutButton/></div>
+					) : (
+						<ModalLogin></ModalLogin>
+					)}			
+				</>
+
+
 				</NavbarItem>
 				<NavbarItem>
 				<Button as={Link} color="primary" href="#" variant="flat">
