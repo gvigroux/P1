@@ -16,7 +16,7 @@ export default function ModalRegister({children}: {children: React.ReactNode}) {
 
   return (
     <>
-      <Button onPress={(ev)=>{setLogin(false);onOpen()}}  as={Link} color="primary" href="#"  variant="flat">
+      <Button onClick={(ev)=>{setLogin(false);onOpen()}}  as={Link} color="primary" href="#"  variant="flat">
                         Sign Up
       </Button>
       <Modal 

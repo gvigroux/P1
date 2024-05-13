@@ -16,12 +16,11 @@ export default function ModalLogin({children}: {children: React.ReactNode}) {
  
   return (
     <>
-      <Link onPress={(ev)=>{setLogin(true);onOpen()}} color="primary" className="cursor-pointer">Login</Link>
+      <Link onClick={(ev)=>{setLogin(true);onOpen()}} color="primary" className="cursor-pointer">Login</Link>
 
       <Modal 
         isOpen={isOpen} 
         onOpenChange={onOpenChange}
-        placement="top-center"
       >
         <ModalContent>
           {(onClose) => (
