@@ -7,7 +7,7 @@ export default function ModalTest() {
 
   return (
     <>
-      <Button onPress={onOpen}>Open Modal</Button>
+      <Button onClick={onOpen}>Open Modal</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
