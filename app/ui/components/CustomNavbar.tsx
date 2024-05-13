@@ -7,7 +7,7 @@ import ModalLogin from "./modalLogin";
 import { User } from "@nextui-org/react";
 import { CustomLogout } from "./CustomLogout";
 
-export default function CustomNavbar({children}, {children: ReactNode}) {	
+export default function CustomNavbar() {	
     const { data: session } = useSession();
     
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -62,7 +62,7 @@ export default function CustomNavbar({children}, {children: ReactNode}) {
                 ) }
                 {!session && (
                     <>
-                    {children}
+                    {/*children*/}
                     </>
                 )}
 
