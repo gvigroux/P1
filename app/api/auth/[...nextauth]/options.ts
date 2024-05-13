@@ -5,8 +5,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import type { Adapter } from 'next-auth/adapters';
 import prisma from '@/prisma/db'
-import Email from 'next-auth/providers/email';
- 
+import { z } from 'zod';
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -21,6 +20,28 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
+
+        // FROM LEAN NEXTJS
+        const parsedCredentials = z
+        .object({ email: z.string().email(), password: z.string().min(6) })
+        .safeParse(credentials);
+
+        if (parsedCredentials.success) {
+          const { email, password } = parsedCredentials.data;
+          console.log(email);
+          console.log(password);
+          //const user = await getUser(email);
+          //if (!user) return null;          
+          //const passwordsMatch = await bcrypt.compare(password, user.password); 
+          //if (passwordsMatch) return user;
+        } 
+        //console.log('Invalid credentials');
+        //return null;
+        // END
+
+
+
+
         const userCredentials = {
           email: credentials?.email,
           password: credentials?.password,

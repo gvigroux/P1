@@ -1,7 +1,7 @@
 import { SHA256 as sha256 } from "crypto-js";
 // import prisma client
 import prisma from "./lib/prisma";
-import hashPassword from "./create"
+import hashPassword from "../../ui/components/create"
 
 
 export default async function handle(req, res) {

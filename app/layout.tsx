@@ -5,8 +5,14 @@ import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
 import { getAuthSession } from "./lib/auth";
 import React from "react";
-import CustomNavbar from "./ui/components/CustomNavbar";
-import CustomLogin from "./ui/components/CustomLogin";
+import SessionProvider from "./lib/SessionProvider";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/navbar";
+import { Link } from "@nextui-org/link";
+import { User } from "@nextui-org/user";
+import { CustomLogout } from "./ui/components/CustomLogout";
+import ModalLogin from "./ui/components/modalLogin";
+import { FormCreateUser } from "./ui/components/FormCreateUser";
+import ModalRegister from "./ui/components/ModalRegister";
 
 
 export const metadata: Metadata = {
@@ -29,18 +35,92 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({children}: { children: React.ReactNode }) {
 	const session = await getAuthSession();
-
+	const menuItems = [
+		"Profile",
+		"Dashboard",
+		"Activity",
+		"Analytics",
+		"System",
+		"Deployments",
+		"Help & Feedback",
+		"Log Out",
+	  ];
+	  
 	return (
 	  <html lang="en" className='dark'>
 		<body>
-			<CustomNavbar>
-				<CustomLogin session={session}/>
-			</CustomNavbar>
+        	<SessionProvider session={session}>
+				
+			<Navbar>			
+				<NavbarMenuToggle aria-label="Menu" className="sm:hidden" />
+				<NavbarBrand>
+					<p className="font-bold text-inherit">ACME</p>
+				</NavbarBrand>
+				<NavbarContent className="hidden sm:flex gap-4" justify="center">
+					<NavbarItem>
+					<Link color="foreground" href="#">
+						Features
+					</Link>
+					</NavbarItem>
+					<NavbarItem isActive>
+					<Link href="#" aria-current="page">
+						Customers
+					</Link>
+					</NavbarItem>
+					<NavbarItem>
+					<Link color="foreground" href="#">
+						Integrations
+					</Link>
+					</NavbarItem>
+				</NavbarContent>
+				<NavbarContent justify="end">
+					<NavbarItem>
+						{session && (
+							<>
+								<User   
+									name={session.user?.name}
+									className="align-bottom px-4"
+									avatarProps={{src: session.user?.image as string}}
+								/>
+								<CustomLogout/>
+							</>
+						) }
+						{!session && (
+							<>
+							<ModalLogin>
+								<></>
+							</ModalLogin>
+							<ModalRegister>
+								<></>
+							</ModalRegister>
+							</>
+						)}
+		
+					</NavbarItem>
+				</NavbarContent>					
+				<NavbarMenu>
+					{menuItems.map((item, index) => (
+					<NavbarMenuItem key={`${item}-${index}`}>
+						<Link
+						color={
+							index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+						}
+						className="w-full"
+						href="#"
+						size="lg"
+						>
+						{item}
+						</Link>
+					</NavbarMenuItem>
+					))}
+				</NavbarMenu>
+			</Navbar>			
 			<Providers>
 				{children}
 			</Providers>
-		</body>
-	  </html>
+		</SessionProvider>
+	</body>
+	</html>
 	);
   }
 

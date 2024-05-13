@@ -2,6 +2,8 @@ import { Button, Link, User } from "@nextui-org/react";
 import ModalLogin from "./modalLogin";
 import { Session } from "next-auth";
 import { CustomLogout } from "./CustomLogout";
+import { createUser } from "./create";
+import { FormCreateUser } from "./FormCreateUser";
 
 export default async function CustomLogin({session}: {session: Session | null}) {	
 
@@ -18,7 +20,9 @@ export default async function CustomLogin({session}: {session: Session | null}) 
                  </>
             ) : (
                 <>
-                    <ModalLogin></ModalLogin>
+                    <ModalLogin>
+                        <FormCreateUser/>
+                    </ModalLogin>
                 </>
             )}			
         </>

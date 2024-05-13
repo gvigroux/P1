@@ -1,9 +1,14 @@
 'use client'
 import { Link } from "@nextui-org/link";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/navbar";
+import { useSession } from "next-auth/react";
 import React from "react";
+import ModalLogin from "./modalLogin";
+import { User } from "@nextui-org/react";
+import { CustomLogout } from "./CustomLogout";
 
-export default function CustomNavbar({children}: {children: React.ReactNode}) {	
+export default function CustomNavbar({children}, {children: ReactNode}) {	
+    const { data: session } = useSession();
     
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 	const menuItems = [
@@ -19,9 +24,9 @@ export default function CustomNavbar({children}: {children: React.ReactNode}) {
     return (<Navbar onMenuOpenChange={setIsMenuOpen}>
 			
         <NavbarMenuToggle
-        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        className="sm:hidden"
-        />
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden"
+            />
     
         <NavbarBrand>
             <p className="font-bold text-inherit">ACME</p>
@@ -45,7 +50,22 @@ export default function CustomNavbar({children}: {children: React.ReactNode}) {
         </NavbarContent>
         <NavbarContent justify="end">
             <NavbarItem>
-                {children}
+                {session && (
+                    <>
+                        <User   
+                            name={session.user?.name}
+                            className="align-bottom px-4"
+                            avatarProps={{src: session.user?.image as string}}
+                        />
+                        <CustomLogout/>
+                    </>
+                ) }
+                {!session && (
+                    <>
+                    {children}
+                    </>
+                )}
+
             </NavbarItem>
         </NavbarContent>
         
