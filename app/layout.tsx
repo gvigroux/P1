@@ -13,6 +13,7 @@ import { CustomLogout } from "./ui/components/CustomLogout";
 import ModalLogin from "./ui/components/modalLogin";
 import { FormCreateUser } from "./ui/components/FormCreateUser";
 import ModalRegister from "./ui/components/ModalRegister";
+import ModalTest from "./ui/components/ModalTest";
 
 
 export const metadata: Metadata = {
@@ -93,6 +94,7 @@ export default async function RootLayout({children}: { children: React.ReactNode
 							<ModalRegister>
 								<></>
 							</ModalRegister>
+							<ModalTest/>
 							</>
 						)}
 		
