@@ -14,6 +14,10 @@ import ModalRegister from "./ui/components/ModalRegister";
 import { createUserFromAction } from "./action/login";
 import UserInNavbar from "./ui/components/UserInNavbar";
 
+import "vanilla-cookieconsent/dist/cookieconsent.css";
+import * as CookieConsent from "vanilla-cookieconsent";
+import CookieConsentComponent from "./ui/components/CookieConsent";
+
 
 export const metadata: Metadata = {
 	title: {
@@ -34,6 +38,9 @@ export const viewport: Viewport = {
 }
 
 export default async function RootLayout({children}: { children: React.ReactNode }) {
+
+
+	
 	const session = await getAuthSession();
 	const menuItems = [
 		"Profile",
@@ -109,7 +116,8 @@ export default async function RootLayout({children}: { children: React.ReactNode
 			<Providers>
 				{children}
 			</Providers>
-		</SessionProvider>
+		</SessionProvider>		
+		<CookieConsentComponent />
 	</body>
 	</html>
 	);

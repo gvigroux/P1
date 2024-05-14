@@ -6,7 +6,7 @@ import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";;
 import {Link} from "@nextui-org/react";
-
+import CookieConsentControls from '../app/ui/components/CookieConsentApiControls';
 
 
 
@@ -53,6 +53,7 @@ export default async function Home() {
 				</Snippet>
 			</div>
 			
+			<CookieConsentControls />
 		</section>
 	);
 }
