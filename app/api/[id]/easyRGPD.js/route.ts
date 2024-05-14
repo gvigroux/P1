@@ -13,9 +13,9 @@ export async function GET(
   const options = { status: 200, statusText: "Success", headers};
 
 
-  const config = await prisma.Config.findFirst();
+  const config = await prisma.config.findFirst();
 
-
-  const response = new Response(config.data, options);
+  
+  const response = new Response(config!.data, options);
   return response;
 }
