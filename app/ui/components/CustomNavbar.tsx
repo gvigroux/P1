@@ -3,9 +3,7 @@ import { Link } from "@nextui-org/link";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/navbar";
 import { useSession } from "next-auth/react";
 import React from "react";
-import ModalLogin from "./modalLogin";
 import { User } from "@nextui-org/react";
-import { CustomLogout } from "./CustomLogout";
 
 export default function CustomNavbar() {	
     const { data: session } = useSession();
@@ -57,7 +55,6 @@ export default function CustomNavbar() {
                             className="align-bottom px-4"
                             avatarProps={{src: session.user?.image as string}}
                         />
-                        <CustomLogout/>
                     </>
                 ) }
                 {!session && (
