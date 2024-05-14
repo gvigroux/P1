@@ -75,8 +75,8 @@ export default async function RootLayout({children}: { children: React.ReactNode
 				</NavbarContent>
 				<NavbarContent justify="end">
 					<NavbarItem>
-						{session && (						
-							<UserInNavbar name={session.user?.name!} img={session.user?.image!} />
+						{session && (
+							<UserInNavbar name={session.user?.name!} img={session.user?.image || "https://raw.githubusercontent.com/gvigroux/P1/main/public/images/avatar.png"} />
 						) }
 						{!session && (
 							<>
