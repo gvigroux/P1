@@ -85,3 +85,10 @@ model Authenticator {
  
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+
+model Config {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  data       String?
+  domain     String?
+}

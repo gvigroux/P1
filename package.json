@@ -22,7 +22,7 @@
 		"@nextui-org/switch": "^2.0.28",
 		"@nextui-org/system": "2.1.0",
 		"@nextui-org/theme": "2.2.0",
-		"@prisma/client": "^5.13.0",
+		"@prisma/client": "^5.14.0",
 		"@react-aria/ssr": "^3.9.2",
 		"@react-aria/visually-hidden": "^3.8.10",
 		"@types/react": "18.2.21",
@@ -49,7 +49,7 @@
 	"devDependencies": {
 		"@types/bcrypt": "^5.0.2",
 		"@types/node": "^20.12.8",
-		"prisma": "^5.13.0",
+		"prisma": "^5.14.0",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.4.5"
 	}
