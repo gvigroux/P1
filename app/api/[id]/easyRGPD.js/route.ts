@@ -10,6 +10,8 @@ export async function GET(
 
   const headers = new Headers();
   headers.append("Content-Type","text/javascript");
+  headers.append("Access-Control-Allow-Origin","*");
+  
   const options = { status: 200, statusText: "Success", headers};
 
 
