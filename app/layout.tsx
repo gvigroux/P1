@@ -8,12 +8,11 @@ import React from "react";
 import SessionProvider from "./lib/SessionProvider";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/navbar";
 import { Link } from "@nextui-org/link";
-import { User } from "@nextui-org/user";
-import { CustomLogout } from "./ui/components/CustomLogout";
 import ModalLogin from "./ui/components/modalLogin";
 import { FormCreateUser } from "./ui/components/FormCreateUser";
 import ModalRegister from "./ui/components/ModalRegister";
-import ModalTest from "./ui/components/ModalTest";
+import { createUserFromAction } from "./action/login";
+import UserInNavbar from "./ui/components/UserInNavbar";
 
 
 export const metadata: Metadata = {
@@ -76,25 +75,15 @@ export default async function RootLayout({children}: { children: React.ReactNode
 				</NavbarContent>
 				<NavbarContent justify="end">
 					<NavbarItem>
-						{session && (
-							<>
-								<User   
-									name={session.user?.name}
-									className="align-bottom px-4"
-									avatarProps={{src: session.user?.image as string}}
-								/>
-								<CustomLogout/>
-							</>
+						{session && (						
+							<UserInNavbar name={session.user?.name!} img={session.user?.image!} />
 						) }
 						{!session && (
 							<>
-							<ModalLogin>
-								<></>
-							</ModalLogin>
+							<ModalLogin createUserFromAction={createUserFromAction}/>
 							<ModalRegister>
 								<></>
 							</ModalRegister>
-							<ModalTest/>
 							</>
 						)}
 		

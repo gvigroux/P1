@@ -6,7 +6,6 @@ import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";;
 import {Link} from "@nextui-org/react";
-import ModalTest from "./ui/components/ModalTest";
 
 
 
@@ -53,8 +52,6 @@ export default async function Home() {
 					</span>
 				</Snippet>
 			</div>
-			<ModalTest/>
-
 			
 		</section>
 	);

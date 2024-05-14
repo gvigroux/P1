@@ -6,14 +6,18 @@ import { signIn } from "next-auth/react";
 import { MailIcon } from "../icons/MailIcon";
 import { LockIcon } from "../icons/LockIcon";
 import { GoogleIcon } from "../icons/GoogleIcon";
-//import { authenticate } from "@/app/lib/auth";
 
 
+const initialState = {
+  message: '',
+}
 
-export default function ModalLogin({children}: {children: React.ReactNode}) {
+
+export default function ModalLogin({createUserFromAction}: {createUserFromAction : any}) {
   const [isLogin, setLogin] = useState(false);
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
- 
+
+
   return (
     <>
       <Link onClick={(ev)=>{setLogin(true);onOpen()}} color="primary" className="cursor-pointer">Login</Link>
@@ -29,7 +33,10 @@ export default function ModalLogin({children}: {children: React.ReactNode}) {
               <ModalBody>
                 { isLogin && (
                   <>
+                    <form action={createUserFromAction} >
                     <Input
+                      id="email" 
+                      name="email"
                       autoFocus
                       endContent={
                         <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
@@ -39,6 +46,8 @@ export default function ModalLogin({children}: {children: React.ReactNode}) {
                       variant="bordered"
                    />
                     <Input
+                      id="password"
+                      name="password"
                       endContent={
                         <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                       }
@@ -48,18 +57,21 @@ export default function ModalLogin({children}: {children: React.ReactNode}) {
                       variant="bordered"
                     />
                     <div className="flex py-2 px-1 justify-between">
-                      <Checkbox classNames={{label: "text-small",}}>
+                      <Checkbox 
+                        id="remember"
+                        name="remember"
+                        classNames={{label: "text-small",}}>
                         Remember me
                       </Checkbox>
                         <Link color="primary" href="#" size="sm">
                           Forgot password?
                         </Link>
                     </div>   
+                    <button type="submit">GO</button>
+                    </form>
                   </>  
                 )}
-            
-                {children}   
-                                   
+               
 
                 <Button className="inline-flex items-center text-[#333] text-base font-semibold border-none outline-none shadow-lg bg-gray-50 hover:bg-gray-100 active:bg-gray-50" onClick={() => signIn("google")} color="primary" startContent={<GoogleIcon className="mr-2 -ml-1 w-4 h-4"/>} >
                     SignIn with Google
